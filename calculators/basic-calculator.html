@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>The Calculator</title>
+  <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+  <link href="../style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <div class="header">
+    <a href="../index.html" style="text-decoration:none;cursor:pointer;color:#ffffff">
+      <h1 style="padding-left:20px;"><img src="../images/logo.png"
+          style="vertical-align:text-bottom;height:30px;width:30px;margin-right:10px">The Calculator</h1>
+    </a>
+  </div>
+  <div class="topnav" id="Topnav">
+    <a href="../index.html">About</a>
+    <a href="../calculators.html" class="active">Calculators</a>
+    <a href="../converters.html">Converters</a>
+    <a href="javascript:void(0);" class="icon" onclick="responsiveNavbar()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+  <div class="container">
+    <h2>Basic Calculator</h2>
+    <p>Input expressions using the buttons or start typing</p>
+    <p class="notetext">All square root parentheses must be closed<br>Extremely large numbers will cause errors<br>Use Backspace for AC, d for DEL, s for √, p for π, and Enter or = for =</p>
+    <div class="calculatorbody">
+      <input type="text" id="textbox" readonly
+        style="width:275px;height:60px;font-size:20px;text-align:left;border:none;margin-bottom:10px;padding-left:10px;border-radius:6px;"><br>
+      <button class="buttontype2" onclick=textbox.value="">AC</button>
+      <button class="buttontype2" onclick=del()>DEL</button>
+      <button class="buttontype1" onclick=textbox.value+="(">(</button>
+      <button class="buttontype1" onclick=textbox.value+=")">)</button><br>
+      <button class="buttontype1" onclick=textbox.value+="1">1</button>
+      <button class="buttontype1" onclick=textbox.value+="2">2</button>
+      <button class="buttontype1" onclick=textbox.value+="3">3</button>
+      <button class="buttontype1" onclick=textbox.value+="+">+</button>
+      <button class="buttontype1" onclick=textbox.value+="-">-</button><br>
+      <button class="buttontype1" onclick=textbox.value+="4">4</button>
+      <button class="buttontype1" onclick=textbox.value+="5">5</button>
+      <button class="buttontype1" onclick=textbox.value+="6">6</button>
+      <button class="buttontype1" onclick=textbox.value+="*">*</button>
+      <button class="buttontype1" onclick=textbox.value+="/">/</button><br>
+      <button class="buttontype1" onclick=textbox.value+="7">7</button>
+      <button class="buttontype1" onclick=textbox.value+="8">8</button>
+      <button class="buttontype1" onclick=textbox.value+="9">9</button>
+      <button class="buttontype1" onclick=textbox.value+="^">^</button>
+      <button class="buttontype1" onclick=textbox.value+="sqrt(">√</button><br>
+      <button class="buttontype1" onclick=textbox.value+="0">0</button>
+      <button class="buttontype1" onclick=textbox.value+=".">.</button>
+      <button class="buttontype1" onclick=textbox.value+="pi">π</button>
+      <button class="buttontype3" onclick=calculator()>=</button>
+    </div><br><br><br>
+    <a class="backbutton" href="../calculators.html">Back to Calculators</a>
+    <br><br>
+  </div>
+  <script>
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Backspace") {
+        textbox.value = ""
+      }
+      if (event.key === "d") {
+        del()
+      }
+      else if (event.key === "(") {
+        textbox.value += "("
+      }
+      else if (event.key === ")") {
+        textbox.value += ")"
+      }
+      else if (event.key === "1") {
+        textbox.value += "1"
+      }
+      else if (event.key === "2") {
+        textbox.value += "2"
+      }
+      else if (event.key === "3") {
+        textbox.value += "3"
+      }
+      else if (event.key === "+") {
+        textbox.value += "+"
+      }
+      else if (event.key === "-") {
+        textbox.value += "-"
+      }
+      else if (event.key === "4") {
+        textbox.value += "4"
+      }
+      else if (event.key === "5") {
+        textbox.value += "5"
+      }
+      else if (event.key === "6") {
+        textbox.value += "6"
+      }
+      else if (event.key === "*") {
+        textbox.value += "*"
+      }
+      else if (event.key === "/") {
+        textbox.value += "/"
+      }
+      else if (event.key === "7") {
+        textbox.value += "7"
+      }
+      else if (event.key === "8") {
+        textbox.value += "8"
+      }
+      else if (event.key === "9") {
+        textbox.value += "9"
+      }
+      else if (event.key === "^") {
+        textbox.value += "^"
+      }
+      else if (event.key === "s") {
+        textbox.value += "sqrt("
+      }
+      else if (event.key === "0") {
+        textbox.value += "0"
+      }
+      else if (event.key === ".") {
+        textbox.value += "."
+      }
+      else if (event.key === "p") {
+        textbox.value += "pi"
+      }
+      else if (event.key === "Enter") {
+        calculator()
+      }
+      else if (event.key === "=") {
+        calculator()
+      }
+    })
+  </script>
+  <script src="../script.js"></script>
+</body>
+
+</html>

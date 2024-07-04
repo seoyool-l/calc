@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>The Calculator</title>
+  <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+  <link href="../style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+<body>
+  <div class="header">
+    <a href="../index.html" style="text-decoration:none;cursor:pointer;color:#ffffff"><h1 style="padding-left:20px;"><img src="../images/logo.png" style="vertical-align:text-bottom;height:30px;width:30px;margin-right:10px;">The Calculator</h1></a>
+  </div>
+  <div class="topnav" id="Topnav">
+    <a href="../index.html">About</a>
+    <a href="../calculators.html" class="active">Calculators</a>
+    <a href="../converters.html">Converters</a>
+    <a href="javascript:void(0);" class="icon" onclick="responsiveNavbar()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+  <div class="container">
+    <h2>Quadratic Equation Solver</h2>
+    <p>Input an equation in ax² + bx + c = 0 form</p>
+    <p>
+      <input type="text" id="a_value" style="width:30px;" placeholder="a">
+      x²+
+      <input type="text" id="b_value" style="width:30px;" placeholder="b">
+      x+
+      <input type="text" id="c_value" style="width:30px;" placeholder="c">
+    </p>
+    <button onclick="quadratic()">Solve</button><br><br>
+    <p id="output">Solution:</p><br>
+    <canvas id="chart1" style="width:100%;max-width:700px;"></canvas><br><br>
+    <a class="backbutton" href="../calculators.html">Back to Calculators</a>
+    <br><br>
+  </div>
+  <script src="../script.js"></script>
+</body>
+
+</html>

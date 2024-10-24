@@ -28,7 +28,7 @@
   <div class="container">
     <h2>Basic Calculator</h2>
     <p>Input expressions using the buttons or start typing</p>
-    <p class="notetext">All square root parentheses must be closed<br>Extremely large numbers will cause errors<br>Use Backspace for AC, d for DEL, s for √, p for π, and Enter or = for =</p>
+    <p class="notetext">All square root parentheses must be closed<br>Calculations involving extremely large numbers will cause errors or output infinity<br>Use Backspace for AC, d for DEL, s for √, p for π, and Enter or = for =</p>
     <div class="calculatorbody">
       <input type="text" id="textbox" readonly
         style="width:275px;height:60px;font-size:20px;text-align:left;border:none;margin-bottom:10px;padding-left:10px;border-radius:6px;"><br>
@@ -55,9 +55,8 @@
       <button class="buttontype1" onclick=textbox.value+=".">.</button>
       <button class="buttontype1" onclick=textbox.value+="pi">π</button>
       <button class="buttontype3" onclick=calculator()>=</button>
-    </div><br><br><br>
-    <a class="backbutton" href="../calculators.html">Back to Calculators</a>
-    <br><br>
+    </div><br>
+    <a class="backbutton" href="../calculators.html" style="margin-top:40px;">Back to Calculators</a>
   </div>
   <script>
     document.addEventListener("keydown", function (event) {

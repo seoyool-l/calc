@@ -1,8 +1,8 @@
 var scriptElement = document.createElement("script");
 scriptElement.src = "https://unpkg.com/mathjs@13.0.1/lib/browser/math.js";
 document.body.appendChild(scriptElement);
-const check = /^(\d+|\s+|pi)*$/
-const check1 = /^(\d+|\s+|pi|sqrt\(|[()+\-*/^.]|\s)*$/
+const check = /^(\d+|\s+|pi|-)*$/
+const check1 = /^(\d+|\s+|pi|sqrt\(|e|[()+\-*/^.]|\s)*$/
 
 function responsiveNavbar() {
   var x = document.getElementById("Topnav");
@@ -28,9 +28,6 @@ function calculator() {
   var expression = expression.replace(/pi\s*sqrt\(/g, "pi*sqrt("); // π√
   var expression = expression.replace(/pi\s*pi/g, "pi*pi"); // ππ
   var expression = expression.replace(/pi\s*pi/g, "pi*pi"); // ππ
-  var expression = expression.replaceAll("sqrt", "Math.sqrt");
-  var expression = expression.replaceAll("pi", "Math.PI");
-  var expression = expression.replaceAll("^", "**");
   var expression = expression.replace(/(\d)\s*\(/g, "$1*("); // 1(
   var expression = expression.replace(/\)\s*(\d)/g, ")*$1"); // )1
   var expression = expression.replace(/\)\s*\(/g, ")*("); // )(
@@ -38,18 +35,64 @@ function calculator() {
     var resultvar = math.evaluate(expression);
     var resultrounded = Math.round(resultvar);
     var resultnumlength = resultrounded.toString().length;
-    document.getElementById("textbox").value = math
-      .evaluate(expression)
-      .toFixed(15 - resultnumlength);
-  } catch (ReferenceError) {
-    document.getElementById("textbox").value = "Error";
+    var result = math.evaluate(expression).toFixed(15 - resultnumlength)
+    if (result.includes(".")) {
+      if (result.endsWith("0")) {
+        result = result.slice(0, -1)
+        if (result.endsWith("0")) {
+          result = result.slice(0, -1)
+          if (result.endsWith("0")) {
+            result = result.slice(0, -1)
+            if (result.endsWith("0")) {
+              result = result.slice(0, -1)
+              if (result.endsWith("0")) {
+                result = result.slice(0, -1)
+                if (result.endsWith("0")) {
+                  result = result.slice(0, -1)
+                  if (result.endsWith("0")) {
+                    result = result.slice(0, -1)
+                    if (result.endsWith("0")) {
+                      result = result.slice(0, -1)
+                      if (result.endsWith("0")) {
+                        result = result.slice(0, -1)
+                        if (result.endsWith("0")) {
+                          result = result.slice(0, -1)
+                          if (result.endsWith("0")) {
+                            result = result.slice(0, -1)
+                            if (result.endsWith("0")) {
+                              result = result.slice(0, -1)
+                              if (result.endsWith("0")) {
+                                result = result.slice(0, -1)
+                                if (result.endsWith("0")) {
+                                  result = result.slice(0, -1)
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    if (result.endsWith(".")) {
+      result = result.slice(0, -1)
+    }
+    document.getElementById("textbox").value = result
+  } catch (err) {
+    document.getElementById("textbox").value = "Error"
   }
 }
 function del() {
   var boxtext = document.getElementById("textbox").value;
   var boxtextlasttwo = boxtext.slice(-2)
   var boxtextlastfive = boxtext.slice(-5)
-  if (boxtext.includes("Error")) {
+  if (boxtext.includes("Error") || boxtext.includes("Infinity")) {
     document.getElementById("textbox").value = "";
   }
   else if (boxtextlasttwo == "pi") {
@@ -70,7 +113,7 @@ function quadratic() {
   var c = document.getElementById("c_value").value;
   var calcoutput = "";
   if (isNaN(a) || isNaN(b) || isNaN(c)) {
-    calcoutput = "Output: one or more inputs were not numbers";
+    calcoutput = "Solution: error - invalid input";
   } else {
     var a_float = parseFloat(a);
     var b_float = parseFloat(b);
@@ -86,20 +129,23 @@ function quadratic() {
           (-b_float - Math.sqrt(b_float ** 2 - 4 * a_float * c_float)) /
           (2 * a_float);
         var result2rounded = Math.round(resultvar2);
-        var resultnumlength2 = result2rounded.toString().length;
-        calcoutput = `Output: ${((-b_float + Math.sqrt(b_float ** 2 - 4 * a_float * c_float)) / (2 * a_float)).toFixed(15 - resultnumlength1)} and ${((-b_float - Math.sqrt(b_float ** 2 - 4 * a_float * c_float)) / (2 * a_float)).toFixed(15 - resultnumlength2)}`;
+        var resultnumlength2 = result2rounded.toString().length
+        var result1 = 1 * (((-b_float + Math.sqrt(b_float ** 2 - 4 * a_float * c_float)) / (2 * a_float)).toFixed(15 - resultnumlength1))
+        var result2 = 1 * (((-b_float - Math.sqrt(b_float ** 2 - 4 * a_float * c_float)) / (2 * a_float)).toFixed(15 - resultnumlength2))
+        calcoutput = `Solution: ${result1} and ${result2}`;
       } else if (b_float ** 2 - 4 * a_float * c_float == 0) {
         var resultvar1 =
           (-b_float + Math.sqrt(b_float ** 2 - 4 * a_float * c_float)) /
           (2 * a_float);
         var result1rounded = Math.round(resultvar1);
         var resultnumlength1 = result1rounded.toString().length;
-        calcoutput = `Output: ${((-b_float + Math.sqrt(b_float ** 2 - 4 * a_float * c_float)) / (2 * a_float)).toFixed(15 - resultnumlength1)}`;
+        var result1 = 1 * (((-b_float + Math.sqrt(b_float ** 2 - 4 * a_float * c_float)) / (2 * a_float)).toFixed(15 - resultnumlength1))
+        calcoutput = `Solution: ${result1}`;
       } else {
-        calcoutput = "Output: no real solutions";
+        calcoutput = "Solution: no real solutions (no x-intercepts)";
       }
-    } catch (RangeError) {
-      calcoutput = "Output: values are too large";
+    } catch (err) {
+      calcoutput = "Solution: error - output has too many digits";
     }
   }
   document.getElementById("output").innerHTML = calcoutput;
@@ -149,9 +195,15 @@ function triangle(rttri_var) {
   var output1 = "";
   var error = 0;
   if (!check.test(angleABC) || !check.test(angleBCA) || !check.test(angleCAB) || !check.test(AB) || !check.test(BC) || !check.test(CA)) {
-    document.getElementById("output").innerHTML = "Output: invalid input"
+    document.getElementById("output").innerHTML = "Output: error - invalid input"
     return
   }
+  var angleABC = angleABC.replace(/\s+/g, "")
+  var angleBCA = angleBCA.replace(/\s+/g, "")
+  var angleCAB = angleCAB.replace(/\s+/g, "")
+  var AB = AB.replace(/\s+/g, "")
+  var BC = BC.replace(/\s+/g, "")
+  var CA = CA.replace(/\s+/g, "")
   if (rttri_var == true) {
     if (amunit == "1") {
       angleABC = "pi/2";
@@ -241,9 +293,9 @@ function triangle(rttri_var) {
       }
       var m_angleCAB = parseFloat(angleCAB);
     }
-  } catch {
+  } catch (err) {
     document.getElementById("output").innerHTML =
-      "Output: one or more inputs were not numbers";
+      "Output: error - invalid input";
     return;
   }
   if (rttri_var == true) {
@@ -298,7 +350,7 @@ function triangle(rttri_var) {
       }
     } else {
       error = 1;
-      output1 = "Output: not enough information given";
+      output1 = "Output: error - not enough information given";
     }
   } else {
     if (
@@ -423,9 +475,6 @@ function triangle(rttri_var) {
             ) *
               180) /
             Math.PI;
-        } else {
-          error = 1;
-          output1 = `Output: error`;
         }
       }
       //SAS case
@@ -550,9 +599,6 @@ function triangle(rttri_var) {
             ) *
               180) /
             Math.PI;
-        } else {
-          error = 1;
-          output1 = `Output: error`;
         }
       } else if (
         knownvalues.includes("BC") &&
@@ -675,9 +721,6 @@ function triangle(rttri_var) {
             ) *
               180) /
             Math.PI;
-        } else {
-          error = 1;
-          output1 = `Output: error`;
         }
       } else if (
         knownvalues.includes("AB") &&
@@ -800,9 +843,6 @@ function triangle(rttri_var) {
             ) *
               180) /
             Math.PI;
-        } else {
-          error = 1;
-          output1 = `Output: error`;
         }
       }
       //SSA case
@@ -1011,7 +1051,13 @@ function triangle(rttri_var) {
       }
     } else {
       error = 1;
-      output1 = "Output: not enough information given";
+      output1 = "Output: error - not enough information given";
+    }
+  }
+  if (m_angleABC == "" || m_angleBCA == "" || m_angleCAB == "" || m_AB == "" || m_BC == "" || m_CA == "") {
+    if (error == 0) {
+      error = 1;
+      output1 = "Output: error - unknown error"
     }
   }
   if (error == 0) {
@@ -1034,8 +1080,8 @@ function triangle(rttri_var) {
     var m_CAlength = m_CArounded.toString().length;
     try {
       output = `Output: m∠ABC=${m_angleABC.toFixed(15 - m_angleABClength)}, m∠BCA=${m_angleBCA.toFixed(15 - m_angleBCAlength)}, m∠CAB=${m_angleCAB.toFixed(15 - m_angleCABlength)}, AB=${m_AB.toFixed(15 - m_ABlength)}, BC=${m_BC.toFixed(15 - m_BClength)}, CA=${m_CA.toFixed(15 - m_CAlength)}`;
-    } catch (RangeError) {
-      output = "Output: values are too large";
+    } catch (err) {
+      output = "Output: error - output has too many digits";
     }
   } else {
     output = output1;
@@ -1070,11 +1116,11 @@ function length_convert() {
   var result1rounded = Math.round(resultvar1);
   var resultnumlength1 = result1rounded.toString().length;
   try {
-  document.getElementById("output").innerHTML =
-    `Output: ${(valuevar_float * converttovar * convertfromvar).toFixed(15 - resultnumlength1)} ${unitlabel}`;
+    document.getElementById("output").innerHTML =
+      `Output: ${(valuevar_float * converttovar * convertfromvar).toFixed(15 - resultnumlength1)} ${unitlabel}`;
   }
-  catch(RangeError) {
-    document.getElementById("output").innerHTML = "Output: values are too large"
+  catch (err) {
+    document.getElementById("output").innerHTML = "Output: error - output has too many digits"
   }
 }
 
@@ -1107,12 +1153,12 @@ function mass_convert() {
   var resultvar1 = valuevar_float * converttovar * convertfromvar;
   var result1rounded = Math.round(resultvar1);
   var resultnumlength1 = result1rounded.toString().length;
-  try{
-  document.getElementById("output").innerHTML =
-    `Output: ${(valuevar_float * converttovar * convertfromvar).toFixed(15 - resultnumlength1)} ${unitlabel}`;
+  try {
+    document.getElementById("output").innerHTML =
+      `Output: ${(valuevar_float * converttovar * convertfromvar).toFixed(15 - resultnumlength1)} ${unitlabel}`;
   }
-  catch (RangeError){
-    document.getElementById("output").innerHTML = "Output: values are too large"
+  catch (err) {
+    document.getElementById("output").innerHTML = "Output: error - output has too many digits"
   }
 }
 
@@ -1168,12 +1214,12 @@ function area_convert() {
   var resultvar1 = valuevar_float * converttovar * convertfromvar;
   var result1rounded = Math.round(resultvar1);
   var resultnumlength1 = result1rounded.toString().length;
-  try{
-  document.getElementById("output").innerHTML =
-    `Output: ${(valuevar_float * converttovar * convertfromvar).toFixed(15 - resultnumlength1)} ${unitlabel}`;
+  try {
+    document.getElementById("output").innerHTML =
+      `Output: ${(valuevar_float * converttovar * convertfromvar).toFixed(15 - resultnumlength1)} ${unitlabel}`;
   }
-  catch (RangeError){
-    document.getElementById("output").innerHTML = "Output: values are too large"
+  catch (err) {
+    document.getElementById("output").innerHTML = "Output: error - output has too many digits"
   }
 }
 
@@ -1232,12 +1278,12 @@ function volume_convert() {
   var resultvar1 = valuevar_float * converttovar * convertfromvar;
   var result1rounded = Math.round(resultvar1);
   var resultnumlength1 = result1rounded.toString().length;
-  try{
-  document.getElementById("output").innerHTML =
-    `Output: ${(valuevar_float * converttovar * convertfromvar).toFixed(15 - resultnumlength1)} ${unitlabel}`;
+  try {
+    document.getElementById("output").innerHTML =
+      `Output: ${(valuevar_float * converttovar * convertfromvar).toFixed(15 - resultnumlength1)} ${unitlabel}`;
   }
-  catch (RangeError){
-    document.getElementById("output").innerHTML = "Output: values are too large"
+  catch (err) {
+    document.getElementById("output").innerHTML = "Output: error - output has too many digits"
   }
 }
 
@@ -1268,12 +1314,12 @@ function temperature_convert() {
   var unitlabel = temperature_unitID[tounitvar_int];
   var resultrounded = Math.round(resultvar);
   var resultnumlength = resultrounded.toString().length;
-  try{
-  document.getElementById("output").innerHTML =
-    `Output: ${resultvar.toFixed(15 - resultnumlength)}${unitlabel}`;
+  try {
+    document.getElementById("output").innerHTML =
+      `Output: ${resultvar.toFixed(15 - resultnumlength)}${unitlabel}`;
   }
-  catch (RangeError){
-    document.getElementById("output").innerHTML = "Output: values are too large"
+  catch (err) {
+    document.getElementById("output").innerHTML = "Output: error - output has too many digits"
   }
 }
 
@@ -1284,7 +1330,7 @@ const am_unitID = ["degrees", "rad"];
 function am_convert() {
   var valueinputvar = document.getElementById("valueinput").value;
   if (!check.test(valueinputvar)) {
-    document.getElementById("output").innerHTML = "Output: invalid input"
+    document.getElementById("output").innerHTML = "Output: error - invalid input"
     return
   }
   var valuevar = valueinputvar.replace(/(\d)\s*pi/g, "$1*pi"); // 1π
@@ -1302,12 +1348,12 @@ function am_convert() {
   var resultvar1 = valuevar_float * converttovar * convertfromvar;
   var result1rounded = Math.round(resultvar1);
   var resultnumlength1 = result1rounded.toString().length;
-  try{
-  document.getElementById("output").innerHTML =
-    `Output: ${(valuevar_float * converttovar * convertfromvar).toFixed(15 - resultnumlength1)} ${unitlabel}`;
+  try {
+    document.getElementById("output").innerHTML =
+      `Output: ${(valuevar_float * converttovar * convertfromvar).toFixed(15 - resultnumlength1)} ${unitlabel}`;
   }
-  catch (RangeError){
-    document.getElementById("output").innerHTML = "Output: values are too large"
+  catch (err) {
+    document.getElementById("output").innerHTML = "Output: error - output has too many digits"
   }
 }
 
@@ -1334,7 +1380,7 @@ function area() {
     result = ((valueinput1 + valueinput2) / 2) * valueinput3
   }
   else if (shape == "7") {
-    result = (valueinput1*(valueinput2**2))/(4*Math.tan(Math.PI/valueinput1))
+    result = (valueinput1 * (valueinput2 ** 2)) / (4 * Math.tan(Math.PI / valueinput1))
   }
   var resultrounded = Math.round(result)
   var resultlength = resultrounded.toString().length
@@ -1342,7 +1388,7 @@ function area() {
   try {
     document.getElementById("output").innerHTML = `Output: ${result.toFixed(15 - resultlength)}`
   }
-  catch (RangeError) {
-    document.getElementById("output").innerHTML = "Output: values are too large"
+  catch (err) {
+    document.getElementById("output").innerHTML = "Output: error - output has too many digits"
   }
 }
